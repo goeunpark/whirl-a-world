@@ -22,6 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+// set template to ejs from jade default
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

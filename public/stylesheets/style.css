@@ -6,3 +6,55 @@ body {
 a {
   color: #00B7FF;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+body #svg-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+path {
+  stroke: none;
+}
+
+path:first-child {
+  fill: #BDD684 !important;
+}
+
+circle {
+  fill: #fff;
+  stroke: #000;
+  pointer-events: none;
+}
+
+.PiYG .q0-9 {
+  fill: #e1efd5;
+}
+.PiYG .q1-9 {
+  fill: #ceddc6;
+}
+.PiYG .q2-9 {
+  fill: #a1b0a1;
+}
+.PiYG .q3-9 {
+  fill: #8c9b8f;
+}
+.PiYG .q4-9 {
+  fill: #7a8a81;
+}
+.PiYG .q5-9 {
+  fill: #5a6a67;
+}
+.PiYG .q6-9 {
+  fill: #3d4f50;
+}
+.PiYG .q7-9 {
+  fill: #1e3037;
+}
+.PiYG .q8-9 {
+  fill: #10232c;
+}

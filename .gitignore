@@ -5,5 +5,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Node modeule
-node_modules
+# Ignore uploaded files in development
+/node_modules

@@ -16,14 +16,37 @@ data = d3.range(2000).map(function() { return [randomX(), randomY()]; });
 
 console.log(data)
 
-svg.append("rect")
-.attr("fill", "rgb(34, 60, 153)")
+// CREATE A GRADIENT FOR BACKGROUND
+const defs = svg.append("defs")
+const linearGradient = defs.append("linearGradient")
+  .attr("id", "linear-gradient")
+  .attr("x1", "0%")
+  .attr("y1", "0%")
+  .attr("x2", "100%")
+  .attr("y2", "100%");
+
+linearGradient.append("stop")
+  .attr("offset", "0%")
+  .attr("stop-color", "rgb(139, 55, 55)");
+
+linearGradient.append("stop")
+  .attr("offset", "100%")
+  .attr("stop-color", "rgb(34, 60, 153)");
+
+
+const rect = svg.append("rect")
+.style("fill", "url(#linear-gradient)")
 .attr("pointer-events", "all")
 .attr("width", mapWidth)
 .attr("height", mapHeight)
 .call(d3.zoom()
 .scaleExtent([1, 8])
 .on("zoom", zoom));
+
+
+
+
+
 
 // const star = svg.selectAll("polygon")
 //   .data(data)

@@ -1,20 +1,16 @@
 const container = document.getElementById("map-container");
 const svg = d3.select(container).append("svg");
 
-svg.attr("id", "map")
-.attr("preserveAspectRatio", "xMinYMin meet")
-.attr("viewBox", "0 0 960 550");
+svg
+  .attr("id", "map")
+  .attr("preserveAspectRatio", "xMinYMin meet")
+  .attr("viewBox", "0 0 960 550");
 
+// stretch svg height and width to window sizes
 const map = document.getElementById("map");
 const mapWidth = map.getBoundingClientRect().width;
 const mapHeight = map.getBoundingClientRect().height;
-console.log(mapHeight)
 
-const randomX = d3.randomNormal(mapWidth / 2, 200),
-randomY = d3.randomNormal(mapHeight / 2, 200),
-data = d3.range(2000).map(function() { return [randomX(), randomY()]; });
-
-console.log(data)
 
 // CREATE A GRADIENT FOR BACKGROUND
 const defs = svg.append("defs")
@@ -34,15 +30,44 @@ linearGradient.append("stop")
   .attr("stop-color", "rgb(34, 60, 153)");
 
 
-const rect = svg.append("rect")
-.style("fill", "url(#linear-gradient)")
-.attr("pointer-events", "all")
-.attr("width", mapWidth)
-.attr("height", mapHeight)
-.call(d3.zoom()
-.scaleExtent([1, 8])
-.on("zoom", zoom));
+// data for dots
+const randomX = d3.randomNormal(mapWidth / 2, 200);
+const randomY = d3.randomNormal(mapHeight / 2, 200);
+const data = d3.range(2000).map(function() {return [randomX(), randomY()]; });
+const num = data.length;
+const delaunay = d3.Delaunay.from(data);
+const voronoi = delaunay.voronoi([0, 0, 960, 500]);
 
+
+const rect = svg.append("rect")
+  .style("fill", "url(#linear-gradient)")
+  .attr("pointer-events", "all")
+  .attr("width", mapWidth)
+  .attr("height", mapHeight)
+  .call(d3.zoom()
+    .scaleExtent([1, 8])
+    .on("zoom", zoom));
+
+// create a voronoid spread
+// let point = delaunay.find(100, 300);
+// let neighbors = delaunay.neighbors(point);
+// let neighborsArray = [...neighbors];
+//
+// console.log(neighborsArray);
+//
+// for (let i = 0; i < num; i++) {
+//   let voronoiRender = voronoi.renderCell(i);
+//   if (voronoiRender != undefined){
+//     console.log(voronoiRender);
+//     let color = i == point ? 'red' : 'white';
+//     svg.append('path')
+//       .attr('d', voronoiRender)
+//       .attr('fill', color)
+//       .attr('stroke', 'black')
+//       .attr('stroke-width', '100');
+//   }
+// }
+//
 
 const circle = svg.selectAll("circle")
 .data(data)
@@ -61,25 +86,6 @@ function transform(t) {
 }
 
 
-// const star = svg.selectAll("polygon")
-//   .data(data)
-//   .enter.append("polygon")
-//   .attr("stroke", "peachpuff")
-//   .attr("stroke-width", "2")
-//   .attr("points", "100,10 40,180 190,60 10,60 160,180")
-//   .attr("transform", transform(d3.zoomIdentity));
-
-// const element = d3.select('#map').node();
-// const width = element.getBoundingClientRect().width;
-// const height = element.getBoundingClientRect().height;
-
-//  const svg = d3.select("svg"),
-// width = +svg.attr("width"),
-// height = +svg.attr("height"),
-// aspect = width / height;
-
-
-//
 // const w = 200;
 // const h = 200;
 // //

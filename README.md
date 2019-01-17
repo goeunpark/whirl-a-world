@@ -47,3 +47,8 @@ note to self: use [...neighborPoints] for array of neighboring indexes
 
 a glitch: when the initial window's width isn't wide enough, crops weirdly
 ![glitch of map generator](/public/images/glitch-on-zoom.png)
+
+
+### thursday, jan 17
+- whoa voronois!! currently working on: how to make shapes not look like italy / penninsulas with current random neigboring poloygon code 
+![screenshot of random generated voronoi cluster](/public/images/mvp.png)

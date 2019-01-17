@@ -44,18 +44,6 @@ const rect = svg.append("rect")
 .on("zoom", zoom));
 
 
-
-
-
-
-// const star = svg.selectAll("polygon")
-//   .data(data)
-//   .enter.append("polygon")
-//   .attr("stroke", "peachpuff")
-//   .attr("stroke-width", "2")
-//   .attr("points", "100,10 40,180 190,60 10,60 160,180")
-//   .attr("transform", transform(d3.zoomIdentity));
-
 const circle = svg.selectAll("circle")
 .data(data)
 .enter().append("circle")
@@ -73,7 +61,13 @@ function transform(t) {
 }
 
 
-
+// const star = svg.selectAll("polygon")
+//   .data(data)
+//   .enter.append("polygon")
+//   .attr("stroke", "peachpuff")
+//   .attr("stroke-width", "2")
+//   .attr("points", "100,10 40,180 190,60 10,60 160,180")
+//   .attr("transform", transform(d3.zoomIdentity));
 
 // const element = d3.select('#map').node();
 // const width = element.getBoundingClientRect().width;

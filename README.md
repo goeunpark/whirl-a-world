@@ -33,6 +33,7 @@ element.getBoundingClientRect().width;
 
 ### tuesday, jan 15
 - stack overflow on [making SVG container 100% of window](https://stackoverflow.com/questions/44833788/making-svg-container-100-width-and-height-of-parent-container-in-d3-v4-instead)
+- made a background gradient following [this talk by nadieh bremer](https://policyviz.com/podcast/episode-65-nadieh-bremer/)
 
 
 ### wednesday, jan 16
@@ -41,3 +42,5 @@ element.getBoundingClientRect().width;
 - [SVG semantic zooming](https://bl.ocks.org/mbostock/3680957)
 - read this code for [randomly generating polygon](http://bl.ocks.org/nitaku/16933e96f51571fbbcd6)
 - picked around Interactive Data Visualilzation for the Web
+
+note to self: use [...neighborPoints] for array of neighboring indexes 

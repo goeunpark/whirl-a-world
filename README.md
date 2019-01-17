@@ -43,4 +43,7 @@ element.getBoundingClientRect().width;
 - read this code for [randomly generating polygon](http://bl.ocks.org/nitaku/16933e96f51571fbbcd6)
 - picked around Interactive Data Visualilzation for the Web
 
-note to self: use [...neighborPoints] for array of neighboring indexes 
+note to self: use [...neighborPoints] for array of neighboring indexes
+
+a glitch: when the initial window's width isn't wide enough, crops weirdly
+![glitch of map generator](/public/images/glitch-on-zoom.png)

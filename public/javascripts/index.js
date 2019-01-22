@@ -11,8 +11,7 @@ const voronoi = delaunay.voronoi([0, 0, svgWidth, svgHeight]);
 const num = data.length;
 
 let svg = d3.select('svg')
-  .attr("id", "svg-container")
-  .attr("border", "2px black solid")
+  .attr("id", "map")
   .attr('width', svgWidth)
   .attr('height', svgHeight)
   .call(d3.zoom().on("zoom", function () {

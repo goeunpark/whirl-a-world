@@ -5,19 +5,26 @@ numLandforms = numLandforms[Math.floor(Math.random() * numLandforms.length)];
 let landSize = [100, 400, 800, 1000, 1200];
 const randomX = d3.randomUniform(0, svgWidth);
 const randomY = d3.randomUniform(0, svgHeight);
-const data = d3.range(30000).map(function() { return [randomX(), randomY()]; });
+const data = d3.range(50000).map(function() { return [randomX(), randomY()]; });
 const delaunay = d3.Delaunay.from(data);
 const voronoi = delaunay.voronoi([0, 0, svgWidth, svgHeight]);
 const num = data.length;
 
+
 let svg = d3.select('svg')
-  .attr("id", "map")
-  .attr('width', svgWidth)
-  .attr('height', svgHeight)
-  .call(d3.zoom().on("zoom", function () {
-     svg.attr("transform", d3.event.transform)
-  }))
-  .append("g");
+.attr("id", "map")
+.attr('width', svgWidth)
+.attr('height', svgHeight)
+.append("g")
+.call(d3.zoom()
+.scaleExtent([1, 50])
+.translateExtent([[0, 0], [svgWidth, svgHeight]])
+.on("zoom", zoomed));
+
+let zoomed = function () {
+  svg.attr("transform", d3.event.transform)
+}
+
 
 // locationNeighbor key: seed point, value: array of neighboring points
 let locationNeighbors = {};

@@ -52,3 +52,9 @@ a glitch: when the initial window's width isn't wide enough, crops weirdly
 ### thursday, jan 17
 - whoa voronois!! currently working on: how to make shapes not look like italy / penninsulas with current random neigboring poloygon code
 ![screenshot of random generated voronoi cluster](/public/images/mvp.png)
+
+### weekend, jan 19 - 21
+- played around with settings on:
+  - how many nodes are generated
+  - how many times landmass expands to nearby neighbors
+![screenshot of map that expands to much](/public/images/bad-render.png)

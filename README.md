@@ -58,3 +58,6 @@ a glitch: when the initial window's width isn't wide enough, crops weirdly
   - how many nodes are generated
   - how many times landmass expands to nearby neighbors
 ![screenshot of map that expands to much](/public/images/bad-render.png)
+
+- added multiple landforms
+![](/public/images/multiple-landform-solid.png) ![](/public/images/multiple-landform.png)

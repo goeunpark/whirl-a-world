@@ -60,4 +60,6 @@ a glitch: when the initial window's width isn't wide enough, crops weirdly
 ![screenshot of map that expands to much](/public/images/bad-render.png)
 
 - added multiple landforms
-![](/public/images/multiple-landform-solid.png) ![](/public/images/multiple-landform.png)
+with background voronoi            |  solid background
+:-------------------------:|:-------------------------:
+![](/public/images/multiple-landform.png)  |  ![](/public/images/multiple-landform-solid.png)

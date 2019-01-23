@@ -1,52 +1,49 @@
 const container = document.getElementById("map-container");
-const svg = d3.select(container).append("svg");
+const svg2 = d3.select(container).append("svg");
 
-svg
+svg2
   .attr("id", "map")
   .attr("preserveAspectRatio", "xMinYMin meet")
   .attr("viewBox", "0 0 960 550");
 
-// stretch svg height and width to window sizes
+// stretch svg2 height and width to window sizes
 const map = document.getElementById("map");
 const mapWidth = map.getBoundingClientRect().width;
 const mapHeight = map.getBoundingClientRect().height;
 
 
 // CREATE A GRADIENT FOR BACKGROUND
-const defs = svg.append("defs")
-const linearGradient = defs.append("linearGradient")
+const defs2 = svg2.append("defs")
+const linearGradient2 = defs2.append("linearGradient")
   .attr("id", "linear-gradient")
   .attr("x1", "0%")
   .attr("y1", "0%")
   .attr("x2", "100%")
   .attr("y2", "100%");
 
-linearGradient.append("stop")
+linearGradient2.append("stop")
   .attr("offset", "0%")
   .attr("stop-color", "rgb(139, 55, 55)");
 
-linearGradient.append("stop")
+linearGradient2.append("stop")
   .attr("offset", "100%")
   .attr("stop-color", "rgb(34, 60, 153)");
 
 
-// data for dots
-const randomX = d3.randomNormal(mapWidth / 2, 200);
-const randomY = d3.randomNormal(mapHeight / 2, 200);
-const data = d3.range(2000).map(function() {return [randomX(), randomY()]; });
-const num = data.length;
-const delaunay = d3.Delaunay.from(data);
-const voronoi = delaunay.voronoi([0, 0, 960, 500]);
+// // data for dots
+// const randomX = d3.randomNormal(mapWidth / 2, 200);
+// const randomY = d3.randomNormal(mapHeight / 2, 200);
+// const data = d3.range(2000).map(function() {return [randomX(), randomY()]; });
+// const num = data.length;
+// const delaunay = d3.Delaunay.from(data);
+// const voronoi = delaunay.voronoi([0, 0, 960, 500]);
 
 
-const rect = svg.append("rect")
+const rect2 = svg2.append("rect")
   .style("fill", "url(#linear-gradient)")
   .attr("pointer-events", "all")
   .attr("width", mapWidth)
-  .attr("height", mapHeight)
-  .call(d3.zoom()
-    .scaleExtent([1, 8])
-    .on("zoom", zoom));
+  .attr("height", mapHeight);
 
 // create a voronoid spread
 // let point = delaunay.find(100, 300);
@@ -60,7 +57,7 @@ const rect = svg.append("rect")
 //   if (voronoiRender != undefined){
 //     console.log(voronoiRender);
 //     let color = i == point ? 'red' : 'white';
-//     svg.append('path')
+//     svg2.append('path')
 //       .attr('d', voronoiRender)
 //       .attr('fill', color)
 //       .attr('stroke', 'black')
@@ -68,22 +65,6 @@ const rect = svg.append("rect")
 //   }
 // }
 //
-
-const circle = svg.selectAll("circle")
-.data(data)
-.enter().append("circle")
-.attr("r", 3)
-.attr("transform", transform(d3.zoomIdentity));
-
-function zoom() {
-  circle.attr("transform", transform(d3.event.transform));
-}
-
-function transform(t) {
-  return function(d) {
-    return "translate(" + t.apply(d) + ")";
-  };
-}
 
 
 // const w = 200;
@@ -96,18 +77,18 @@ function transform(t) {
 // // const delaunay = d3.Delaunay.from(vertices);
 // // const voronoi = delaunay.voronoi();
 // //
-// // let svg = d3.select('svg')
+// // let svg2 = d3.select('svg2')
 // //   .append('viewbox', '0 0 500 500');
 // //
-// // let path = svg.selectAll("path")
+// // let path = svg2.selectAll("path")
 // //   .data(voronoi)
-// //   .enter().append("svg:path")
+// //   .enter().append("svg2:path")
 // //   .attr("class", function(d, i) { return i ? "q" + (i % 9) + "-9" : null; })
 // //   .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
 // //
-// // svg.selectAll("circle")
+// // svg2.selectAll("circle")
 // //   .data(vertices.slice(1))
-// //   .enter().append("svg:circle")
+// //   .enter().append("svg2:circle")
 // //   .attr("transform", function(d) { return "translate(" + d + ")"; })
 // //   .attr("r", 2);
 // //
@@ -120,27 +101,27 @@ function transform(t) {
 //   return [Math.random() * w, Math.random() * h];
 // });
 //
-// let svg = d3.select("#chart")
-//   .append("svg:svg")
+// let svg2 = d3.select("#chart")
+//   .append("svg2:svg2")
 //   .attr("width", w)
 //   .attr("height", h)
 //   .attr("class", "PiYG");
 //
-// svg.selectAll("path")
+// svg2.selectAll("path")
 //   .data(d3.voronoi(vertices))
-//   .enter().append("svg:path")
+//   .enter().append("svg2:path")
 //   .attr("class", function(d, i) { return i ? "q" + (i % 9) + "-9" : null; })
 //   .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
 //
-// svg.selectAll("circle")
+// svg2.selectAll("circle")
 //   .data(vertices.slice(1))
-//   .enter().append("svg:circle")
+//   .enter().append("svg2:circle")
 //   .attr("transform", function(d) { return "translate(" + d + ")"; })
 //   .attr("r", 2);
 //
 // function update() {
-//   vertices[0] = d3.svg.mouse(this);
-//   svg.selectAll("path")
+//   vertices[0] = d3.svg2.mouse(this);
+//   svg2.selectAll("path")
 //   .data(d3.geom.voronoi(vertices)
 //   .map(function(d) { return "M" + d.join("L") + "Z"; }))
 //   .filter(function(d) { return this.getAttribute("d") != d; })

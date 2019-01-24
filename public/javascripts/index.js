@@ -20,26 +20,57 @@ let relaxedPoints;
 let delaunay = d3.Delaunay.from(data);
 let voronoi = delaunay.voronoi([0, 0, svgWidth, svgHeight]);
 
+// set optional gridlines
+const x_scale = d3.scaleLinear()
+.domain([0, svgWidth / 2])
+.range([0, svgWidth]);
+
+const y_scale = d3.scaleLinear()
+.domain([0, svgHeight / 2])
+.range([0, svgHeight]);
+
+let xAxis = d3.axisTop(x_scale)
+.ticks(8)
+.tickSize(-svgHeight);
+
+let yAxis = d3.axisLeft(y_scale)
+.ticks(8).tickSize(-svgWidth);
+
+// zoom function for the axes
+let zoomed = function zoomed() {
+  svg.attr("transform", d3.event.transform);
+  let new_x_scale = d3.event.transform.rescaleX(x_scale);
+  let new_y_scale = d3.event.transform.rescaleY(y_scale);
+  x_axis.transition()
+  .duration(0)
+  .call(xAxis.scale(new_x_scale));
+  y_axis.transition()
+  .duration(0)
+  .call(yAxis.scale(new_y_scale));
+}
+
 let svg = d3.select('svg')
-.attr("id", "map")
-.attr('width', svgWidth)
-.attr('height', svgHeight)
-.append("g")
-.call(d3.zoom()
-.scaleExtent([1, 50])
-.translateExtent([[0, 0], [svgWidth, svgHeight]])
-.on("zoom", function () {
-  svg.attr("transform", d3.event.transform)
-}));
+  .attr("id", "map")
+  .attr('width', svgWidth)
+  .attr('height', svgHeight)
+  .append("g")
+  .call(d3.zoom()
+    .scaleExtent([1, 50])
+    .translateExtent([[0, 0], [svgWidth, svgHeight]])
+    .on("zoom", function () {
+      svg.attr("transform", d3.event.transform);
+    })
+  );
+
+let x_axis = svg.append("g")
+let y_axis = svg.append("g")
 
 let funfettiGenerate = d3.scaleOrdinal(d3.schemePastel1);
-
 let greenGenerate = function (i) {
   let l = i.toString().length;
   let v = i/Math.pow(10, l);
   return d3.interpolateGreens(v);
 };
-
 
 const normalizePoints = function normalizePoints() {
   for (let i = 0; i < 2; i++){
@@ -49,7 +80,7 @@ const normalizePoints = function normalizePoints() {
   }
   delaunay = d3.Delaunay.from(relaxedPoints);
   voronoi = delaunay.voronoi([0, 0, svgWidth, svgHeight]);
-}
+};
 
 // populate the locationNeighbors with array of neighbors
 const createNeighbors = function createNeighbors() {
@@ -158,6 +189,21 @@ function updateFunfetti() {
     }
   }
 };
+
+function createGrid() {
+    x_axis.attr("class", "x-axis")
+    .call(xAxis);
+    y_axis.attr("class", "y-axis")
+    .call(yAxis);
+
+    svg.call(d3.zoom()
+      .scaleExtent([1, 50])
+      .translateExtent([[0, 0], [svgWidth, svgHeight]])
+      .on("zoom", zoomed)
+    )
+  let ticks = d3.selectAll('g');
+    ticks.raise();
+}
 
 
 normalizePoints();

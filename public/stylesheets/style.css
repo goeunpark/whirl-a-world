@@ -16,5 +16,27 @@ h1 {
 #map {
   overflow: hidden;
   align-self: center;
-  border: 4px black double;
+  border: 5px black double;
+  outline: 1px black solid;
+outline-offset: -8px;
+}
+
+.button-container{
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+}
+
+#funfetti-button {
+  background-color: #e88b5d;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Inconsolata', monospace;
+  font-weight: lighter;
+  font-size: 16px;
 }

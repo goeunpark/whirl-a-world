@@ -44,4 +44,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+let favicon = require('serve-favicon');
+
+
+app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
+
 module.exports = app;

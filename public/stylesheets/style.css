@@ -25,18 +25,27 @@ outline-offset: -8px;
   align-items: center;
   text-align: center;
   margin: 20px;
+
 }
 
-#funfetti-button {
-  background-color: #e88b5d;
+.button {
   border-radius: 25px;
   border: none;
   color: white;
   padding: 15px 32px;
+  margin: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-family: 'Inconsolata', monospace;
   font-weight: lighter;
   font-size: 16px;
+}
+
+#funfetti-button {
+  background-color: #e88b5d;
+}
+
+#grid-button {
+  background-color: rgb(95, 110, 185);
 }

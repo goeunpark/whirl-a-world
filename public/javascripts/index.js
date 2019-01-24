@@ -11,10 +11,12 @@ numLandforms = numLandforms[Math.floor(Math.random() * numLandforms.length)];
 const data = d3.range(30000).map(function() { return [randomX(), randomY()]; });
 const num = data.length;
 
-let relaxedPoints;
 // locationNeighbors =>  seed point: array of neighboring points
 let locationNeighbors = {};
+
 let landGradient = [];
+let territory = [];
+let relaxedPoints;
 let delaunay = d3.Delaunay.from(data);
 let voronoi = delaunay.voronoi([0, 0, svgWidth, svgHeight]);
 
@@ -30,13 +32,13 @@ let svg = d3.select('svg')
   svg.attr("transform", d3.event.transform)
 }));
 
-let colorGenerate = d3.scaleOrdinal(d3.schemePastel1);
+let funfettiGenerate = d3.scaleOrdinal(d3.schemePastel1);
 
 let greenGenerate = function (i) {
   let l = i.toString().length;
   let v = i/Math.pow(10, l);
   return d3.interpolateGreens(v);
-}
+};
 
 
 const normalizePoints = function normalizePoints() {
@@ -81,12 +83,11 @@ const createNeighbors = function createNeighbors() {
 };
 
 const createLandform = function createLandform() {
-  let territory = [];
   let seeds = Object.keys(locationNeighbors);
+  let seedNeighbors = Object.values(locationNeighbors);
   for (let i = 0; i < seeds.length; i++) {
     seeds[i] = parseInt(seeds[i]);
   }
-  let seedNeighbors = Object.values(locationNeighbors);
 
   for (let i = 0; i < seedNeighbors.length; i++) {
     let l = seedNeighbors[i].length;
@@ -103,18 +104,42 @@ const createLandform = function createLandform() {
     territory = territory.concat(seedNeighbors[i]);
   }
 
-  console.log("land gradient", landGradient);
-  console.log("territory", territory);
+  for (let i = 0; i < num; i++) {
+    let path = voronoi.renderCell(i);
+    if (path != undefined ){
+      let strokeColor = 'rgb(95, 157, 173)';
+      let color = 'rgb(95, 157, 173)';
+      let index;
+      // let color = (i%2 == 0) ? 'rgb(95, 157, 173)' : 'rgb(69, 130, 159)';
+
+      for (let j = 0; j < seedNeighbors.length; j++){
+        if (seedNeighbors[j].includes(i) ){
+          index = seedNeighbors[j].indexOf(i);
+
+          let k = landGradient[j][index];
+          let clr = d3.interpolateGreens(k);
+          color = clr;
+          strokeColor = clr;
+        }
+      }
+      svg.append('path')
+      .attr('d', path)
+      .attr('fill', color)
+      .attr('stroke', strokeColor);
+    }
+  }
+};
+
+function updateFunfetti() {
+  let seedNeighbors = Object.values(locationNeighbors);
 
   for (let i = 0; i < num; i++) {
     let path = voronoi.renderCell(i);
     if (path != undefined ){
 
-      let strokeColor = 'rgb(95, 157, 173)';
-      let color = 'rgb(95, 157, 173)';
+      let strokeColor = funfettiGenerate(i);
+      let color = funfettiGenerate(i);
       let index;
-      let checkOverlap = {};
-      // let color = (i%2 == 0) ? 'rgb(95, 157, 173)' : 'rgb(69, 130, 159)';
 
       for (let j = 0; j < seedNeighbors.length; j++){
         if (seedNeighbors[j].includes(i) ){
